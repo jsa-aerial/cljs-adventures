@@ -3,7 +3,8 @@
   [:require
    [reagent.core :as rgt]
    [cljs.core.async :as async :refer [put! >! <! chan]]
-   [projone.qex :as qex]])
+   [projone.qex :as qex]
+   [projone.dancer :as dancer]])
 
 (enable-console-print!)
 
