@@ -1,0 +1,12 @@
+
+.title {
+    background-color: lightblue;
+}
+
+.item {
+    background-color: white;
+}
+
+.item.active {
+    background-color: skyblue;
+}
