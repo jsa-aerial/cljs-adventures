@@ -1,10 +1,12 @@
 # projone
 
-A Clojure library designed to ... well, that part is up to you.
+Fooling around with Quil, figwheel, reagent, core.async
 
 ## Usage
 
-FIXME
+lein figwheel
+
+Then load into browser resources/public/index.html
 
 ## License
 
