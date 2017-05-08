@@ -1,10 +1,18 @@
 (ns projone.core
   [:require-macros [cljs.core.async.macros :refer [go go-loop]]]
   [:require
-   [reagent.core :as rgt]
    [cljs.core.async :as async :refer [put! >! <! chan]]
-   [projone.qex :as qex]
-   [projone.dancer :as dancer]])
+   [re-com.core
+    :as rcm
+    :refer [h-box v-box box gap line
+            input-text input-password input-textarea
+            label checkbox radio-button slider title p]]
+   [re-com.misc
+    :refer [input-text-args-desc]]
+   [re-demo.utils
+    :refer [panel-title title2 args-table github-hyperlink status-text]]
+   [reagent.core :as rgt]
+   ])
 
 (enable-console-print!)
 
@@ -61,6 +69,16 @@
         (fn[_]
           (put! event-channel [:update-active-item {:active-item item}]))}
        (item :display)]])])
+
+
+;;To answer my own question:
+;;view:
+;;[:input {:type "file" :id "file" :name "file"
+;;         :on-change
+;;         #(dispatch [:save-rm-file :file (-> % .-target .-files (aget 0))])}]
+;;in the handler:
+;;(http/put url {:multipart-params {k file}})...
+
 
 
 (defn app []

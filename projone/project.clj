@@ -1,14 +1,15 @@
 (defproject projone "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :description "Exploring various reagent,re-com, etc"
+  :url "https://github.com/jsa-aerial/cljs-adventures/tree/master/projone"
+  :license {:name "The MIT License (MIT)"
+            :url "http://opensource.org/licenses/MIT"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.521"
                   :exclusions [org.apache.ant/ant]]
                  [org.clojure/core.async "0.3.442"]
                  [quil "2.6.0"]
+                 [re-com "2.0.0"]
                  [reagent "0.6.1"]
                  [cljsbuild "1.1.5"]]
 
@@ -19,8 +20,10 @@
   ;; tasks, e.g. the "lein compile" and "lein jar" tasks.
   :hooks [leiningen.cljsbuild]
 
-  :figwheel {:css-dirs ["resources/public/stylesheets"]}
-  
+  :figwheel
+  {:css-dirs ["resources/public/stylesheets"]
+   :server-port 3450}
+
   ;; All lein-cljsbuild-specific configuration is under the :cljsbuild
   ;; key.
   :cljsbuild
@@ -55,6 +58,13 @@
       ;; https://github.com/clojure/clojurescript/wiki/Source-maps
       :source-map true
 
+
+      ;; New extern inference for :advanced opt.
+      ;; writes externs file (see below) inferred_externs.js
+      ;; Also need (set! *warn-on-infer* true) turns on inference warnings
+      ;;:infer-externs true
+
+      ;; Otherwise or additionally:
       ;; Configure externs files for external libraries.
       ;; Defaults to the empty vector [].
 
@@ -72,5 +82,12 @@
       ;; returns a HTTP Code 200 Defaults to the empty vector [].
       ;;:foreign-libs [{:file "http://example.com/remote.js"
       ;;                :provides  ["my.example"]}]
+
+      ;; New option to enable Google closure compiler to compile node
+      ;; modules (like React)
+      ;; Need to also
+      ;; npm install --save-deps module-deps
+      ;; yarn add --dev module-deps
+      ;; :npm-deps {:react "15.4.2", :react-dom "15.4.2"}
 
       }}]})
