@@ -12,6 +12,8 @@
    [re-demo.utils
     :refer [panel-title title2 args-table github-hyperlink status-text]]
    [reagent.core :as rgt]
+   [projone.qex :as qex]
+   [projone.dancer :as dancer]
    ])
 
 (enable-console-print!)
