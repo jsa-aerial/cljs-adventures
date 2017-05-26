@@ -1,15 +1,18 @@
 (defproject dmmproj "0.1.0-SNAPSHOT"
-  :description "CLJS DMM with Quil..."
-  :url "http://example.com/FIXME"
+  :description "Exploring various reagent,re-com, etc"
+  :url "https://github.com/jsa-aerial/cljs-adventures/tree/master/projone"
   :license {:name "The MIT License (MIT)"
             :url "http://opensource.org/licenses/MIT"}
 
-  :dependencies [[org.clojure/clojure "1.9.0-alpha16"]
-                 [org.clojure/clojurescript "1.9.521"
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojurescript "1.9.542"
                   :exclusions [org.apache.ant/ant]]
                  [org.clojure/core.async "0.3.442"]
+
                  [quil "2.6.0"]
-                 [re-com "2.0.0"]
+
+                 [cljs-ajax "0.6.0"]
+                 [re-com "2.1.0"]
                  [reagent "0.6.1"]
                  [cljsbuild "1.1.5"]]
 
@@ -22,7 +25,7 @@
 
   :figwheel
   {:css-dirs ["resources/public/stylesheets"]
-   :server-port 3450}
+   :server-port 3451}
 
   ;; All lein-cljsbuild-specific configuration is under the :cljsbuild
   ;; key.
@@ -62,6 +65,7 @@
       ;; New extern inference for :advanced opt.
       ;; writes externs file (see below) inferred_externs.js
       ;; Also need (set! *warn-on-infer* true) turns on inference warnings
+      ;; And see https://github.com/dcodeIO/node.js-closure-compiler-externs
       ;;:infer-externs true
 
       ;; Otherwise or additionally:
