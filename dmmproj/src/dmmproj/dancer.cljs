@@ -1,4 +1,4 @@
-(ns projone.dancer
+(ns dmmproj.dancer
   (:require [quil.core :as q :include-macros true]
   ))
 

@@ -1,4 +1,4 @@
-(ns projone.qex
+(ns dmmproj.qex
   (:require [quil.core :as q :include-macros true]
             [quil.middleware :as m]))
 
