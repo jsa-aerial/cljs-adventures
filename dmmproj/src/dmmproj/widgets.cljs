@@ -23,6 +23,36 @@
 (enable-console-print!)
 
 
+(defonce app-state
+  (rgt/atom
+   {:message "hello marion, is that you?"
+    :items [{:idx 1 :display "Item 1"}
+            {:idx 2 :display "Item 2"}
+            {:idx 3 :display "Item 3"}
+            {:idx 4 :display "Item 4"}
+            {:idx 5 :display "Item 5"}
+            {:idx 6 :display "TEST"}]
+    :active-item {}
+    :frame-rate 1}))
+
+(def curcnt (rgt/atom 0))
+
+(def event-channel (chan))
+
+(def events
+  {:update-active-item
+   (fn [{:keys [active-item]}]
+     (swap! app-state assoc :active-item active-item))})
+
+
+(go
+  (while true
+    (let [[event data :as x] (<! event-channel)]
+      (println (pr-str x))
+      ((events event) data))))
+
+
+
 (def icons
   [{:id "zmdi-plus"    :label [:i {:class "zmdi zmdi-plus"}]}
    {:id "zmdi-delete"  :label [:i {:class "zmdi zmdi-delete"}]}
@@ -74,34 +104,6 @@
            :on-click #()]]]]])))
 
 
-(defonce app-state
-  (rgt/atom
-   {:message "hello marion, is that you?"
-    :items [{:idx 1 :display "Item 1"}
-            {:idx 2 :display "Item 2"}
-            {:idx 3 :display "Item 3"}
-            {:idx 4 :display "Item 4"}
-            {:idx 5 :display "Item 5"}
-            {:idx 6 :display "TEST"}]
-    :active-item {}}))
-
-(def curcnt (rgt/atom 0))
-
-(def event-channel (chan))
-
-(def events
-  {:update-active-item
-   (fn [{:keys [active-item]}]
-     (swap! app-state assoc :active-item active-item))})
-
-
-(go
-  (while true
-    (let [[event data :as x] (<! event-channel)]
-      (println (pr-str x))
-      ((events event) data))))
-
-
 (defn inc-count []
   [:p {:on-click (fn[_] (swap! curcnt inc))}
    @curcnt])
@@ -140,6 +142,35 @@
       :child (item :display)])])
 
 
+(defn frame-slider
+  [n]
+  (let [slider-val  (rgt/atom "10.0")
+        slider-min  (rgt/atom "0.1")
+        slider-max  (rgt/atom "100")
+        slider-step (rgt/atom "0.1")
+        disabled?   (rgt/atom false)]
+    (fn[n]
+      [h-box
+       :align :center
+       :gap "20px"
+       :children [[slider
+                   :model     slider-val
+                   :min       slider-min
+                   :max       slider-max
+                   :step      slider-step
+                   :width     "300px"
+                   :on-change #(do (reset! slider-val (str %))
+                                   (swap! app-state assoc :frame-rate %))
+                   :disabled? disabled?]
+                  [input-text
+                   :model      slider-val
+                   :width      "60px"
+                   :height     "26px"
+                   :on-change  #(do (reset! slider-val (str %))
+                                    (swap! app-state assoc :frame-rate %))
+                   :change-on-blur? false]]])))
+
+
 ;;To answer my own question:
 ;;view:
 ;;[:input {:type "file" :id "file" :name "file"
@@ -166,9 +197,11 @@
       ;;[inc-count]
       ;;[md-circle-icon-button-demo]
       [line]
-      (item-list event-channel
+      #_(item-list event-channel
                  (@app-state :items)
-                 (@app-state :active-item))]]]])
+                 (@app-state :active-item))
+      [frame-slider 1]
+      ]]]])
 
 #_(rgt/render [app] (js/document.querySelector "#cljs-target"))
 

@@ -1,10 +1,11 @@
 (ns dmmproj.qex
   (:require [quil.core :as q :include-macros true]
-            [quil.middleware :as m]))
+            [quil.middleware :as m]
+            [dmmproj.widgets :as wid]))
 
 (defn setup []
   ; Set frame rate to 30 frames per second.
-  (q/frame-rate 1)
+  (q/frame-rate (@wid/app-state :frame-rate))
   ; Set color mode to HSB (HSV) instead of default RGB.
   (q/color-mode :hsb)
   ; setup function returns initial state. It contains
@@ -18,6 +19,7 @@
    :angle (+ (:angle state) 0.1)})
 
 (defn draw-state [state]
+  (q/frame-rate (@wid/app-state :frame-rate))
   ; Clear the sketch by filling it with light-grey color.
   (q/background 240)
   ; Set circle color.
@@ -33,7 +35,7 @@
       (q/ellipse x y 100 100))))
 
 (q/defsketch my-sketch
-  :host "my-sketch"
+  :host "quil-sketch"
   :size [500 500]
   ; setup function called only once, during sketch initialization.
   :setup setup
