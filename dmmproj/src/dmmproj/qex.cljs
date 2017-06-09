@@ -35,7 +35,7 @@
       (q/ellipse x y 100 100))))
 
 (q/defsketch my-sketch
-  :host "quil-sketch"
+  :host "quil-canvas"
   :size [500 500]
   ; setup function called only once, during sketch initialization.
   :setup setup

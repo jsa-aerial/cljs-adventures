@@ -153,7 +153,8 @@
       [h-box
        :align :center
        :gap "20px"
-       :children [[slider
+       :children [[label :label [:b "Frame Rate"]]
+                  [slider
                    :model     slider-val
                    :min       slider-min
                    :max       slider-max
@@ -201,6 +202,7 @@
                  (@app-state :items)
                  (@app-state :active-item))
       [frame-slider 1]
+      [:canvas {:id "quil-canvas"}]
       ]]]])
 
 #_(rgt/render [app] (js/document.querySelector "#cljs-target"))
