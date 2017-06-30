@@ -33,14 +33,17 @@
 
 
 (defn setup []
-  (q/frame-rate (@app-state :frame-rate)))
+  (q/frame-rate (@app-state :frame-rate))
+  (q/background 127)
+  (q/color-mode :rgb 2.0)
+  {:hor-board-size })
 
 (defn update-state [state]
   (q/frame-rate (@app-state :frame-rate))
   :do-state-updates)
 
 (defn draw-state [state]
-  (q/background 127))
+  )
 
 
 (q/defsketch selfie
