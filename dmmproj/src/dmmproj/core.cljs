@@ -7,6 +7,7 @@
    [dmmproj.widgets :refer [app]]
 
    [dmmproj.qex :as qex]
+   [dmm.examples.jul-6-2017-experiment :as exp]
    #_[dmmproj.dancer :as dancer]
 
    ])

@@ -14,12 +14,12 @@
    :angle 0})
 
 (defn update-state [state]
-  ; Update sketch state by changing circle color and position.
+  ;; Update sketch state by changing circle color and position.
+  (q/frame-rate (@wid/app-state :frame-rate))
   {:color (mod (+ (:color state) 0.7) 255)
    :angle (+ (:angle state) 0.1)})
 
 (defn draw-state [state]
-  (q/frame-rate (@wid/app-state :frame-rate))
   ; Clear the sketch by filling it with light-grey color.
   (q/background 240)
   ; Set circle color.

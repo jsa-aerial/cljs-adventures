@@ -202,7 +202,12 @@
                  (@app-state :items)
                  (@app-state :active-item))
       [frame-slider 1]
-      [:canvas {:id "quil-canvas"}]
+      [h-box
+       :align :center
+       :gap "8px"
+       :children
+       [[:canvas {:id "quil-canvas"}]
+        [:canvas {:id "quil-try"}]]]
       ]]]])
 
 #_(rgt/render [app] (js/document.querySelector "#cljs-target"))

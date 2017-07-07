@@ -36,7 +36,7 @@
   (q/frame-rate (@app-state :frame-rate))
   (q/background 127)
   (q/color-mode :rgb 2.0)
-  {:hor-board-size })
+  {:hor-board-size (@app-state :width)})
 
 (defn update-state [state]
   (q/frame-rate (@app-state :frame-rate))
